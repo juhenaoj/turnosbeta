@@ -94,3 +94,62 @@ body {
 .forgot:hover {
   text-decoration: underline;
 }
+
+.dashboard {
+  min-height: 100vh;
+  background-color: #F7F8FA;
+  padding: 24px;
+}
+
+.dashboard-header {
+  margin-bottom: 24px;
+}
+
+.dashboard-header h1 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.dashboard-header p {
+  font-size: 14px;
+  color: #6B7280;
+  margin-top: 4px;
+}
+
+.dashboard-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.stat-card {
+  background: #FFFFFF;
+  border: 1px solid #E4E7EC;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.stat-card.alerta {
+  border-color: #FCA5A5;
+  background: #FEF2F2;
+}
+
+.stat-number {
+  font-size: 32px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.stat-card.alerta .stat-number {
+  color: #DC2626;
+}
+
+.stat-label {
+  font-size: 13px;
+  color: #6B7280;
+}
