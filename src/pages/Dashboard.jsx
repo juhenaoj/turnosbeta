@@ -35,6 +35,7 @@ function Dashboard() {
             <span>Horas semana</span>
             <span>Estado</span>
           </div>
+          
           <div className="table-row">
             <span>Ana García</span>
             <span>Mañana</span>
@@ -59,6 +60,34 @@ function Dashboard() {
             <span className="horas-alerta">56h ⚠</span>
             <span className="badge badge-red">Límite</span>
           </div>
+          <div className="dashboard-section">
+        <h2 className="section-title">Alertas activas</h2>
+
+        <div className="alerta-item alerta-roja">
+          <span className="alerta-icono">⚠</span>
+          <div>
+            <p className="alerta-titulo">Sara Ruiz — 56h semanales</p>
+            <p className="alerta-desc">Superó el límite de 48h. Revisar cuadrante.</p>
+          </div>
+        </div>
+
+        <div className="alerta-item alerta-roja">
+          <span className="alerta-icono">⚠</span>
+          <div>
+            <p className="alerta-titulo">Turno noche sin cobertura</p>
+            <p className="alerta-desc">Miércoles a viernes sin personal asignado. Mínimo requerido: 2.</p>
+          </div>
+        </div>
+
+        <div className="alerta-item alerta-amarilla">
+          <span className="alerta-icono">!</span>
+          <div>
+            <p className="alerta-titulo">Carlos Ríos — permiso pendiente</p>
+            <p className="alerta-desc">Solicitud de permiso para el martes 11. Pendiente de aprobación.</p>
+          </div>
+        </div>
+
+      </div>
         </div>
       </div>
 

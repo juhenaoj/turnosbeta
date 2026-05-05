@@ -8,20 +8,16 @@ body {
   font-family: Arial, sans-serif;
   background-color: #F7F8FA;
   color: #111827;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .login-container {
   width: 100%;
   max-width: 400px;
-  padding: 20px;
+  padding: 40px;
   background: #FFFFFF;
   border: 1px solid #E4E7EC;
   border-radius: 12px;
-  padding: 40px;
+  margin: 100px auto;
 }
 
 .login-header {
@@ -249,4 +245,44 @@ body {
 .badge-red {
   background: #FEE2E2;
   color: #DC2626;
+}
+.alerta-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+
+.alerta-item:last-child {
+  margin-bottom: 0;
+}
+
+.alerta-roja {
+  background: #FEF2F2;
+  border: 1px solid #FECACA;
+}
+
+.alerta-amarilla {
+  background: #FFFBEB;
+  border: 1px solid #FDE68A;
+}
+
+.alerta-icono {
+  font-size: 16px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.alerta-titulo {
+  font-size: 13px;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 2px;
+}
+
+.alerta-desc {
+  font-size: 12px;
+  color: #6B7280;
 }
