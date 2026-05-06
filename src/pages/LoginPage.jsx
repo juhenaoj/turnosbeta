@@ -1,14 +1,17 @@
+import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 
 function LoginPage() {
+  const navigate = useNavigate()
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const handleLogin = () => {
-    console.log('Email:', email)
-    console.log('Password:', password)
-  }
+const handleLogin = () => {
+  console.log('Email:', email)
+  console.log('Password:', password)
+  navigate('/dashboard')
+}
 
   return (
     <div className="login-container">
