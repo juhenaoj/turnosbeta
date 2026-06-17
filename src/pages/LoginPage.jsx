@@ -3,15 +3,26 @@ import { useState } from 'react'
 
 function LoginPage() {
   const navigate = useNavigate()
-
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-const handleLogin = () => {
-  console.log('Email:', email)
-  console.log('Password:', password)
-  navigate('/dashboard')
-}
+  const handleLogin = async () => {
+    const respuesta = await fetch('http://localhost:3000/api/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ email, password })
+    })
+
+    const datos = await respuesta.json()
+
+    if (datos.ok) {
+      navigate('/dashboard')
+    } else {
+      alert(datos.mensaje)
+    }
+  }
 
   return (
     <div className="login-container">
@@ -23,9 +34,9 @@ const handleLogin = () => {
 
       <div className="form-group">
         <label>Correo electrónico</label>
-        <input 
-          type="email" 
-          placeholder="tu@empresa.com" 
+        <input
+          type="email"
+          placeholder="tu@empresa.com"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
@@ -33,9 +44,9 @@ const handleLogin = () => {
 
       <div className="form-group">
         <label>Contraseña</label>
-        <input 
-          type="password" 
-          placeholder="••••••••" 
+        <input
+          type="password"
+          placeholder="••••••••"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
@@ -50,4 +61,3 @@ const handleLogin = () => {
 }
 
 export default LoginPage
-
