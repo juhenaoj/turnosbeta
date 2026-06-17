@@ -5,6 +5,7 @@ function Navbar() {
     <div className="dashboard-nav">
       <Link to="/dashboard">Dashboard</Link>
       <Link to="/empleados">Empleados</Link>
+      <Link to="/cuadrante">Cuadrante</Link>
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import { Navbar } from 'react-router-dom'
+import Navbar from '../components/Navbar'
 
 function Dashboard() {
   return (
