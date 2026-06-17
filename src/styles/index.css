@@ -352,3 +352,40 @@ body {
   font-size: 13px;
   color: #1B2A4A;
 }
+.empleados-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.empleados-form input {
+  flex: 1;
+  min-width: 150px;
+  padding: 10px 14px;
+  border: 1px solid #1B8FA8;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #1B2A4A;
+  outline: none;
+}
+
+.empleados-form input:focus {
+  border-color: #4DD9E0;
+}
+
+.empleados-form button {
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #1B8FA8, #4DD9E0);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.empleados-form button:hover {
+  background: linear-gradient(135deg, #4DD9E0, #1B8FA8);
+}
