@@ -1,3 +1,5 @@
+import { Navbar } from 'react-router-dom'
+
 function Dashboard() {
   return (
     <div className="dashboard">
@@ -6,6 +8,9 @@ function Dashboard() {
         <h1>TurnosBeta</h1>
         <p>Panel del supervisor</p>
       </div>
+      
+      <Navbar />
+
 
       <div className="dashboard-stats">
         <div className="stat-card">
@@ -35,7 +40,7 @@ function Dashboard() {
             <span>Horas semana</span>
             <span>Estado</span>
           </div>
-          
+
           <div className="table-row">
             <span>Ana García</span>
             <span>Mañana</span>
@@ -60,7 +65,10 @@ function Dashboard() {
             <span className="horas-alerta">56h ⚠</span>
             <span className="badge badge-red">Límite</span>
           </div>
-          <div className="dashboard-section">
+        </div>
+      </div>
+
+      <div className="dashboard-section">
         <h2 className="section-title">Alertas activas</h2>
 
         <div className="alerta-item alerta-roja">
@@ -87,8 +95,6 @@ function Dashboard() {
           </div>
         </div>
 
-      </div>
-        </div>
       </div>
 
     </div>

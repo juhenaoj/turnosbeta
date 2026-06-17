@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import Navbar from '../components/Navbar'
 
 function Empleados() {
   const [empleados, setEmpleados] = useState([])
@@ -35,6 +36,8 @@ function Empleados() {
 
   return (
     <div className="empleados-container">
+
+        <Navbar />
 
       <div className="empleados-header">
         <h1>Empleados</h1>

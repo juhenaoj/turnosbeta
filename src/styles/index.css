@@ -389,3 +389,25 @@ body {
 .empleados-form button:hover {
   background: linear-gradient(135deg, #4DD9E0, #1B8FA8);
 }
+
+.dashboard-nav {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.dashboard-nav a {
+  font-size: 14px;
+  font-weight: 500;
+  color: #1B8FA8;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  background: #FFFFFF;
+  border: 1px solid #1B8FA8;
+}
+
+.dashboard-nav a:hover {
+  background: #1B8FA8;
+  color: #FFFFFF;
+}
