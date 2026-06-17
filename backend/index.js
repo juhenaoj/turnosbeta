@@ -87,6 +87,56 @@ app.put('/api/empleados/:id', async (req, res) => {
   }
 })
 
+// Obtener todos los turnos disponibles
+app.get('/api/turnos', async (req, res) => {
+  try {
+    const resultado = await pool.query('SELECT * FROM turnos ORDER BY hora_inicio ASC')
+    res.json({ ok: true, turnos: resultado.rows })
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ ok: false, mensaje: 'Error en el servidor' })
+  }
+})
+
+// Obtener las asignaciones (con datos del empleado y del turno)
+app.get('/api/asignaciones', async (req, res) => {
+  try {
+    const resultado = await pool.query(`
+      SELECT 
+        asignaciones.id,
+        asignaciones.fecha,
+        asignaciones.estado,
+        empleados.nombre AS empleado_nombre,
+        empleados.id AS empleado_id,
+        turnos.nombre AS turno_nombre,
+        turnos.id AS turno_id
+      FROM asignaciones
+      JOIN empleados ON asignaciones.empleado_id = empleados.id
+      JOIN turnos ON asignaciones.turno_id = turnos.id
+      ORDER BY asignaciones.fecha ASC
+    `)
+    res.json({ ok: true, asignaciones: resultado.rows })
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ ok: false, mensaje: 'Error en el servidor' })
+  }
+})
+
+// Crear una asignación nueva
+app.post('/api/asignaciones', async (req, res) => {
+  const { empleado_id, turno_id, fecha } = req.body
+  try {
+    const resultado = await pool.query(
+      'INSERT INTO asignaciones (empleado_id, turno_id, fecha) VALUES ($1, $2, $3) RETURNING *',
+      [empleado_id, turno_id, fecha]
+    )
+    res.json({ ok: true, asignacion: resultado.rows[0] })
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ ok: false, mensaje: 'Error en el servidor' })
+  }
+})
+
 app.listen(PORT, () => {
   console.log('servidor corriendo en http://localhost:' + PORT)
 })
