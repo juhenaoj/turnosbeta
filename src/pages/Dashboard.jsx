@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 
 function Dashboard() {
@@ -42,15 +41,7 @@ function Dashboard() {
         </div>
       </div>
 
-      <div className="dashboard-section">
-        <h2 className="section-title">Accesos rápidos</h2>
-        <div style={{display:'flex', gap:'12px', flexWrap:'wrap'}}>
-          <Link to="/empleados" style={{padding:'12px 20px', background:'#1B8FA8', color:'#fff', borderRadius:'8px', textDecoration:'none', fontSize:'14px', fontWeight:'500'}}>Ver empleados</Link>
-          <Link to="/cuadrante" style={{padding:'12px 20px', background:'#1B8FA8', color:'#fff', borderRadius:'8px', textDecoration:'none', fontSize:'14px', fontWeight:'500'}}>Ver cuadrante</Link>
-          <Link to="/solicitudes" style={{padding:'12px 20px', background:'#1B8FA8', color:'#fff', borderRadius:'8px', textDecoration:'none', fontSize:'14px', fontWeight:'500'}}>Ver solicitudes</Link>
-          <Link to="/reportes" style={{padding:'12px 20px', background:'#1B8FA8', color:'#fff', borderRadius:'8px', textDecoration:'none', fontSize:'14px', fontWeight:'500'}}>Ver reportes</Link>
-        </div>
-      </div>
+
 
     </div>
   )
