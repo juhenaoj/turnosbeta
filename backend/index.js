@@ -191,6 +191,31 @@ app.put('/api/solicitudes/:id', async (req, res) => {
   }
 })
 
+// Reporte general del sistema
+app.get('/api/reportes', async (req, res) => {
+  try {
+    const totalEmpleados = await pool.query('SELECT COUNT(*) FROM empleados')
+    const totalAsignaciones = await pool.query('SELECT COUNT(*) FROM asignaciones')
+    const solicitudesPendientes = await pool.query("SELECT COUNT(*) FROM solicitudes WHERE estado = 'pendiente'")
+    const solicitudesAprobadas = await pool.query("SELECT COUNT(*) FROM solicitudes WHERE estado = 'aprobada'")
+    const solicitudesRechazadas = await pool.query("SELECT COUNT(*) FROM solicitudes WHERE estado = 'rechazada'")
+
+    res.json({
+      ok: true,
+      reporte: {
+        totalEmpleados: totalEmpleados.rows[0].count,
+        totalAsignaciones: totalAsignaciones.rows[0].count,
+        solicitudesPendientes: solicitudesPendientes.rows[0].count,
+        solicitudesAprobadas: solicitudesAprobadas.rows[0].count,
+        solicitudesRechazadas: solicitudesRechazadas.rows[0].count
+      }
+    })
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ ok: false, mensaje: 'Error en el servidor' })
+  }
+})
+
 app.listen(PORT, () => {
   console.log('servidor corriendo en http://localhost:' + PORT)
 })

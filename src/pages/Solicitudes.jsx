@@ -108,8 +108,9 @@ function Solicitudes() {
           <div className="solicitudes-fila" key={s.id}>
             <span>{s.empleado_nombre}</span>
             <span>{s.tipo}</span>
-            <span>{s.fecha_inicio}</span>
-            <span>{s.fecha_fin}</span>
+            <span>{s.fecha_inicio?.split('T')[0]}</span>
+            <span>{s.fecha_fin?.split('T')[0]}</span>
+            
             <span className={`badge ${s.estado === 'aprobada' ? 'badge-green' : s.estado === 'rechazada' ? 'badge-red' : 'badge-amber'}`}>
               {s.estado}
             </span>
