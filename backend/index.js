@@ -137,6 +137,60 @@ app.post('/api/asignaciones', async (req, res) => {
   }
 })
 
+// Obtener todas las solicitudes
+app.get('/api/solicitudes', async (req, res) => {
+  try {
+    const resultado = await pool.query(`
+      SELECT 
+        solicitudes.id,
+        solicitudes.tipo,
+        solicitudes.fecha_inicio,
+        solicitudes.fecha_fin,
+        solicitudes.motivo,
+        solicitudes.estado,
+        empleados.nombre AS empleado_nombre
+      FROM solicitudes
+      JOIN empleados ON solicitudes.empleado_id = empleados.id
+      ORDER BY solicitudes.created_at DESC
+    `)
+    res.json({ ok: true, solicitudes: resultado.rows })
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ ok: false, mensaje: 'Error en el servidor' })
+  }
+})
+
+// Crear una solicitud
+app.post('/api/solicitudes', async (req, res) => {
+  const { empleado_id, tipo, fecha_inicio, fecha_fin, motivo } = req.body
+  try {
+    const resultado = await pool.query(
+      'INSERT INTO solicitudes (empleado_id, tipo, fecha_inicio, fecha_fin, motivo) VALUES ($1, $2, $3, $4, $5) RETURNING *',
+      [empleado_id, tipo, fecha_inicio, fecha_fin, motivo]
+    )
+    res.json({ ok: true, solicitud: resultado.rows[0] })
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ ok: false, mensaje: 'Error en el servidor' })
+  }
+})
+
+// Aprobar o rechazar una solicitud
+app.put('/api/solicitudes/:id', async (req, res) => {
+  const { id } = req.params
+  const { estado } = req.body
+  try {
+    const resultado = await pool.query(
+      'UPDATE solicitudes SET estado=$1 WHERE id=$2 RETURNING *',
+      [estado, id]
+    )
+    res.json({ ok: true, solicitud: resultado.rows[0] })
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ ok: false, mensaje: 'Error en el servidor' })
+  }
+})
+
 app.listen(PORT, () => {
   console.log('servidor corriendo en http://localhost:' + PORT)
 })

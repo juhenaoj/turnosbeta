@@ -3,6 +3,7 @@ import LoginPage from './pages/LoginPage'
 import Dashboard from './pages/Dashboard'
 import Empleados from './pages/Empleados'
 import Cuadrante from './pages/Cuadrante'
+import Solicitudes from './pages/Solicitudes'
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/empleados" element={<Empleados />} />
         <Route path="/cuadrante" element={<Cuadrante />} />
+        <Route path="/solicitudes" element={<Solicitudes />} />
       </Routes>
     </BrowserRouter>
   )
