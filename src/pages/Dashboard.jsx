@@ -1,100 +1,55 @@
+import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 
 function Dashboard() {
+  const [dashboard, setDashboard] = useState(null)
+
+  useEffect(() => {
+    fetch('http://localhost:3000/api/dashboard')
+      .then(r => r.json())
+      .then(datos => setDashboard(datos.dashboard))
+  }, [])
+
+  if (!dashboard) return <div>Cargando...</div>
+
   return (
     <div className="dashboard">
+
+      <Navbar />
 
       <div className="dashboard-header">
         <h1>TurnosBeta</h1>
         <p>Panel del supervisor</p>
       </div>
-      
-      <Navbar />
-
 
       <div className="dashboard-stats">
         <div className="stat-card">
-          <span className="stat-number">8</span>
-          <span className="stat-label">Trabajando ahora</span>
+          <span className="stat-number">{dashboard.totalEmpleados}</span>
+          <span className="stat-label">Total empleados</span>
         </div>
         <div className="stat-card">
-          <span className="stat-number">1</span>
-          <span className="stat-label">Con permiso hoy</span>
+          <span className="stat-number">{dashboard.empleadosHoy}</span>
+          <span className="stat-label">Trabajando hoy</span>
         </div>
         <div className="stat-card alerta">
-          <span className="stat-number">2</span>
+          <span className="stat-number">{dashboard.turnosSinCubrir}</span>
           <span className="stat-label">Turnos sin cubrir</span>
         </div>
         <div className="stat-card">
-          <span className="stat-number">12</span>
+          <span className="stat-number">{dashboard.solicitudesPendientes}</span>
           <span className="stat-label">Solicitudes pendientes</span>
         </div>
       </div>
 
       <div className="dashboard-section">
-        <h2 className="section-title">Estado del equipo hoy</h2>
-        <div className="team-table">
-          <div className="table-header">
-            <span>Empleado</span>
-            <span>Turno hoy</span>
-            <span>Horas semana</span>
-            <span>Estado</span>
-          </div>
-
-          <div className="table-row">
-            <span>Ana García</span>
-            <span>Mañana</span>
-            <span>40h</span>
-            <span className="badge badge-green">Activa</span>
-          </div>
-          <div className="table-row">
-            <span>Luis Pérez</span>
-            <span>Tarde</span>
-            <span>40h</span>
-            <span className="badge badge-blue">En horario</span>
-          </div>
-          <div className="table-row">
-            <span>Carlos Ríos</span>
-            <span>Permiso</span>
-            <span>32h</span>
-            <span className="badge badge-amber">Permiso</span>
-          </div>
-          <div className="table-row alerta">
-            <span>Sara Ruiz</span>
-            <span>Tarde</span>
-            <span className="horas-alerta">56h ⚠</span>
-            <span className="badge badge-red">Límite</span>
-          </div>
+        <h2 className="section-title">Accesos rápidos</h2>
+        <div style={{display:'flex', gap:'12px', flexWrap:'wrap'}}>
+          <Link to="/empleados" style={{padding:'12px 20px', background:'#1B8FA8', color:'#fff', borderRadius:'8px', textDecoration:'none', fontSize:'14px', fontWeight:'500'}}>Ver empleados</Link>
+          <Link to="/cuadrante" style={{padding:'12px 20px', background:'#1B8FA8', color:'#fff', borderRadius:'8px', textDecoration:'none', fontSize:'14px', fontWeight:'500'}}>Ver cuadrante</Link>
+          <Link to="/solicitudes" style={{padding:'12px 20px', background:'#1B8FA8', color:'#fff', borderRadius:'8px', textDecoration:'none', fontSize:'14px', fontWeight:'500'}}>Ver solicitudes</Link>
+          <Link to="/reportes" style={{padding:'12px 20px', background:'#1B8FA8', color:'#fff', borderRadius:'8px', textDecoration:'none', fontSize:'14px', fontWeight:'500'}}>Ver reportes</Link>
         </div>
-      </div>
-
-      <div className="dashboard-section">
-        <h2 className="section-title">Alertas activas</h2>
-
-        <div className="alerta-item alerta-roja">
-          <span className="alerta-icono">⚠</span>
-          <div>
-            <p className="alerta-titulo">Sara Ruiz — 56h semanales</p>
-            <p className="alerta-desc">Superó el límite de 48h. Revisar cuadrante.</p>
-          </div>
-        </div>
-
-        <div className="alerta-item alerta-roja">
-          <span className="alerta-icono">⚠</span>
-          <div>
-            <p className="alerta-titulo">Turno noche sin cobertura</p>
-            <p className="alerta-desc">Miércoles a viernes sin personal asignado. Mínimo requerido: 2.</p>
-          </div>
-        </div>
-
-        <div className="alerta-item alerta-amarilla">
-          <span className="alerta-icono">!</span>
-          <div>
-            <p className="alerta-titulo">Carlos Ríos — permiso pendiente</p>
-            <p className="alerta-desc">Solicitud de permiso para el martes 11. Pendiente de aprobación.</p>
-          </div>
-        </div>
-
       </div>
 
     </div>

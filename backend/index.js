@@ -216,6 +216,43 @@ app.get('/api/reportes', async (req, res) => {
   }
 })
 
+// Dashboard con datos reales
+app.get('/api/dashboard', async (req, res) => {
+  try {
+    const empleadosHoy = await pool.query(`
+      SELECT COUNT(DISTINCT empleado_id) 
+      FROM asignaciones 
+      WHERE fecha::date = CURRENT_DATE
+    `)
+
+    const turnosSinCubrir = await pool.query(`
+      SELECT COUNT(*) FROM asignaciones 
+      WHERE estado = 'programado' 
+      AND fecha::date = CURRENT_DATE
+    `)
+
+    const solicitudesPendientes = await pool.query(`
+      SELECT COUNT(*) FROM solicitudes 
+      WHERE estado = 'pendiente'
+    `)
+
+    const totalEmpleados = await pool.query('SELECT COUNT(*) FROM empleados')
+
+    res.json({
+      ok: true,
+      dashboard: {
+        empleadosHoy: empleadosHoy.rows[0].count,
+        turnosSinCubrir: turnosSinCubrir.rows[0].count,
+        solicitudesPendientes: solicitudesPendientes.rows[0].count,
+        totalEmpleados: totalEmpleados.rows[0].count
+      }
+    })
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ ok: false, mensaje: 'Error en el servidor' })
+  }
+})
+
 app.listen(PORT, () => {
   console.log('servidor corriendo en http://localhost:' + PORT)
 })
