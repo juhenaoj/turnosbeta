@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
+import logo from '../assets/Logo-Jaramillo-Villegas-color-hEMLZW0V.png'
 
 function LoginPage() {
   const navigate = useNavigate()
@@ -28,6 +29,7 @@ function LoginPage() {
     <div className="login-container">
 
       <div className="login-header">
+        <img src={logo} alt="Logo" className="login-logo" />
         <h1>TurnosBeta</h1>
         <p>Ingresa tus datos para continuar</p>
       </div>
