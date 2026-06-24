@@ -5,17 +5,18 @@ import Empleados from './pages/Empleados'
 import Cuadrante from './pages/Cuadrante'
 import Solicitudes from './pages/Solicitudes'
 import Reportes from './pages/Reportes'
+import RutaProtegida from './components/RutaProtegida'
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<LoginPage />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/empleados" element={<Empleados />} />
-        <Route path="/cuadrante" element={<Cuadrante />} />
-        <Route path="/solicitudes" element={<Solicitudes />} />
-        <Route path="/reportes" element={<Reportes />} />
+        <Route path="/dashboard" element={<RutaProtegida><Dashboard /></RutaProtegida>} />
+        <Route path="/empleados" element={<RutaProtegida><Empleados /></RutaProtegida>} />
+        <Route path="/cuadrante" element={<RutaProtegida><Cuadrante /></RutaProtegida>} />
+        <Route path="/solicitudes" element={<RutaProtegida><Solicitudes /></RutaProtegida>} />
+        <Route path="/reportes" element={<RutaProtegida><Reportes /></RutaProtegida>} />
       </Routes>
     </BrowserRouter>
   )
