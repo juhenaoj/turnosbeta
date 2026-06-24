@@ -17,8 +17,8 @@ function LoginPage() {
     })
 
     const datos = await respuesta.json()
-
     if (datos.ok) {
+      localStorage.setItem('usuario', JSON.stringify(datos.usuario))
       navigate('/dashboard')
     } else {
       alert(datos.mensaje)
